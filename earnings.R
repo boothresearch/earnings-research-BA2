@@ -40,6 +40,43 @@ reg03 <- function() {
     dev.off()
 }
 
+# [4] Regress earnings on height controlling for male
+reg04 <- function() {
+    earnings <- subset(earnings, earn>0)
+    fitted.model <- write2file("reg04.txt", log(earn) ~ height + male, earnings)
+
+    png("reg04.png")
+    plot(earnings$height, earnings$earn, xlim = c(40, 90), xlab = "height", ylab= "earnings")
+    abline(fitted.model, col= "red")
+    dev.off()
+}
+
+# [5] Regress earnings on height controlling for male
+reg05 <- function() {
+    earnings <- subset(earnings, earn>0)
+    fitted.model <- write2file("reg05.txt", log(earn) ~ height + male + height:male, earnings)
+
+    png("reg05.png")
+    plot(earnings$height, earnings$earn, xlim = c(40, 90), xlab = "height", ylab= "earnings")
+    abline(fitted.model, col= "red")
+    dev.off()
+}
+
+# [6] Regress earnings on height controlling for male
+reg06 <- function() {
+    earnings <- subset(earnings, earn>0)
+
+    fitted.model <- write2file("reg06.txt", log(earn) ~ log(height) + male, earnings)
+
+    png("reg06.png")
+    plot(earnings$height, earnings$earn, xlim = c(40, 90), xlab = "height", ylab= "earnings")
+    abline(fitted.model, col= "red")
+    dev.off()
+}
+
 reg01()
 reg02()
 reg03()
+reg04()
+reg05()
+reg06()
